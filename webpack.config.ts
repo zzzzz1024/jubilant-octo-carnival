@@ -318,8 +318,12 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         },
       },
     },
+<<<<<<< HEAD
     externals: [
       ({ context, request }, callback) => {
+=======
+    externals: ({ context, request }, callback) => {
+>>>>>>> b0edfd8e4d073506d29eee4fd67a3c4e89bb4a72
         if (!context || !request) {
           return callback();
         }
@@ -351,7 +355,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         }
         return callback(null, 'module-import https://testingcf.jsdelivr.net/npm/' + request + '/+esm');
       },
+<<<<<<< HEAD
     ],
+=======
+>>>>>>> b0edfd8e4d073506d29eee4fd67a3c4e89bb4a72
   });
 }
 
