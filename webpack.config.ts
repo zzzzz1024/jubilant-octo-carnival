@@ -84,6 +84,10 @@ function watch_it(compiler: webpack.Compiler) {
       console.info(`[Listener] 已启动酒馆监听服务, 正在监听: http://0.0.0.0:${port}`);
       io.on('connect', socket => {
         console.info(`[Listener] 成功连接到酒馆网页 '${socket.id}', 初始化推送...`);
+<<<<<<< HEAD
+=======
+        io.emit('iframe_updated');
+>>>>>>> 31623cc5d8ccc8586b1c419243904ec1ce06c18f
         socket.on('disconnect', reason => {
           console.info(`[Listener] 与酒馆网页 '${socket.id}' 断开连接: ${reason}`);
         });
@@ -318,8 +322,12 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         },
       },
     },
+<<<<<<< HEAD
     externals: [
       ({ context, request }, callback) => {
+=======
+    externals: ({ context, request }, callback) => {
+>>>>>>> 31623cc5d8ccc8586b1c419243904ec1ce06c18f
         if (!context || !request) {
           return callback();
         }
@@ -351,7 +359,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         }
         return callback(null, 'module-import https://testingcf.jsdelivr.net/npm/' + request + '/+esm');
       },
+<<<<<<< HEAD
     ],
+=======
+>>>>>>> 31623cc5d8ccc8586b1c419243904ec1ce06c18f
   });
 }
 
