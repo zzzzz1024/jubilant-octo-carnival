@@ -84,6 +84,10 @@ function watch_it(compiler: webpack.Compiler) {
       console.info(`[Listener] 已启动酒馆监听服务, 正在监听: http://0.0.0.0:${port}`);
       io.on('connect', socket => {
         console.info(`[Listener] 成功连接到酒馆网页 '${socket.id}', 初始化推送...`);
+<<<<<<< HEAD
+=======
+        io.emit('iframe_updated');
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
         socket.on('disconnect', reason => {
           console.info(`[Listener] 与酒馆网页 '${socket.id}' 断开连接: ${reason}`);
         });
@@ -117,7 +121,10 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
       path: path.join(__dirname, 'dist', path.relative(path.join(__dirname, 'src'), script_filepath.dir)),
       chunkFilename: `${script_filepath.name}.[contenthash].chunk.js`,
       asyncChunks: true,
+<<<<<<< HEAD
       chunkLoading: 'import',
+=======
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
       clean: true,
       publicPath: '',
       library: {
@@ -191,7 +198,11 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
                   {
                     test: /\.vue\.s(a|c)ss$/,
                     use: [
+<<<<<<< HEAD
                       'vue-style-loader',
+=======
+                      { loader: 'vue-style-loader', options: { ssrId: true } },
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
                       { loader: 'css-loader', options: { url: false } },
                       'postcss-loader',
                       'sass-loader',
@@ -200,7 +211,15 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
                   },
                   {
                     test: /\.vue\.css$/,
+<<<<<<< HEAD
                     use: ['vue-style-loader', { loader: 'css-loader', options: { url: false } }, 'postcss-loader'],
+=======
+                    use: [
+                      { loader: 'vue-style-loader', options: { ssrId: true } },
+                      { loader: 'css-loader', options: { url: false } },
+                      'postcss-loader',
+                    ],
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
                     exclude: /node_modules/,
                   },
                   {
@@ -318,8 +337,12 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
         },
       },
     },
+<<<<<<< HEAD
     externals: [
       ({ context, request }, callback) => {
+=======
+    externals: ({ context, request }, callback) => {
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
         if (!context || !request) {
           return callback();
         }
@@ -345,13 +368,25 @@ function parse_configuration(entry: Entry): (_env: any, argv: any) => webpack.Co
           'vue-router': 'VueRouter',
           yaml: 'YAML',
           zod: 'z',
+<<<<<<< HEAD
+=======
+        'pixi.js': 'PIXI',
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
         };
         if (request in builtin) {
           return callback(null, 'var ' + builtin[request as keyof typeof builtin]);
         }
+<<<<<<< HEAD
         return callback(null, 'module-import https://testingcf.jsdelivr.net/npm/' + request + '/+esm');
       },
     ],
+=======
+      if (['vue3-pixi', 'vue-demi'].includes(request)) {
+        return callback();
+      }
+      return callback(null, 'module-import https://testingcf.jsdelivr.net/npm/' + request + '/+esm');
+    },
+>>>>>>> 56aa0be436939e9e252dae49f7e3d86b2441513c
   });
 }
 
